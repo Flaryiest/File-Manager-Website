@@ -51,5 +51,17 @@ async function createFolder(userID, folderName) {
     }
 }
 
+async function getFolders(userID) {
+    try {
+        const userFolders = await prisma.user.findUnique({
+            where: {id: userID},
+            include: {folders: true}
+        })
+        return userFolders.folders
+    } catch(err) {
+        console.log(err)
+    }
+    
+}
 
-module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder}
+module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders}
