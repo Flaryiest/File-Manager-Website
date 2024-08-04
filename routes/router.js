@@ -13,5 +13,7 @@ router.get("/login", controller.getLoginForm)
 
 router.post("/login", controller.login)
 
+router.get("/upload", controller.getUploadPage)
+
 module.exports = router
 

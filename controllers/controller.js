@@ -15,7 +15,6 @@ async function getSignUpForm(req, res) {
 
 async function signUp(req, res, next) {
     try {
-        
         bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
             await db.createUser(req.body.username, req.body.email, hashedPassword)
           });
@@ -38,6 +37,9 @@ async function login(req, res, next) {
     }) (req, res, next)
 }
 
+async function getUploadPage(req, res) {
+    res.render("upload")
+}
 
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login}
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage}
