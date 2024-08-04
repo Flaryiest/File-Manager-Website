@@ -19,6 +19,7 @@ router.post("/drive/create", controller.createFolder)
 
 router.get("/drive", controller.getDrivePage)
 
+router.get("/logout", controller.logOut)
 
 module.exports = router
 

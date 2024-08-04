@@ -44,6 +44,8 @@ async function getUploadPage(req, res) {
 }
 
 async function getDrivePage(req, res) {
+    userFolders = await db.getFolders(req.user.id)
+    console.log(userFolders)
     if (!(req.user)) {
         res.redirect("/")
     }
@@ -52,9 +54,18 @@ async function getDrivePage(req, res) {
 
 async function createFolder(req, res) {
     console.log(req.body.folderName)
-    console.log(req.user)
     db.createFolder(req.user.id, req.body.folderName)
     res.redirect("/drive")
 }
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage, createFolder}
+async function logOut(req, res) {
+    req.logout((err) => {
+        if (err) {
+        return next(err);
+        }
+        res.redirect("/");
+    });
+}
+
+
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage, createFolder, logOut}
