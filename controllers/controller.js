@@ -14,7 +14,10 @@ async function getSignUpForm(req, res) {
 
 async function signUp(req, res, next) {
     try {
-        db.createUser(req.body.username, req.body.email, req.body.password)
+        
+        bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+            await db.createUser(req.body.username, req.body.email, hashedPassword)
+          });
     } catch(err) {
         return next(err)
     }
