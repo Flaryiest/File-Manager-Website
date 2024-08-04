@@ -49,7 +49,7 @@ async function getDrivePage(req, res) {
     if (!(req.user)) {
         res.redirect("/")
     }
-    res.render("drive")
+    res.render("drive", {folders: userFolders})
 }
 
 async function createFolder(req, res) {
@@ -67,5 +67,10 @@ async function logOut(req, res) {
     });
 }
 
+async function getFolderPage(req, res) {
+    folder = await db.getFolder(req.params.folderID)
+    res.render("folder", {folder: folder})
+}
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage, createFolder, logOut}
+
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage, createFolder, logOut, getFolderPage}

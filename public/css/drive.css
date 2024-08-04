@@ -22,3 +22,28 @@
 .darken{
     filter: brightness(50%); 
 }
+
+
+.folder-icon {
+    width: 200px;
+}
+
+.folder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Lato";
+}
+
+.folderContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-left: 10dvw;
+    padding-right: 10dvw;
+    padding-top: 10dvh;
+    padding-bottom: 10dvh;
+
+}

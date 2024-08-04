@@ -15,6 +15,16 @@
     <div>
         <button class="createFolderButton">Create Folder</button>
     </div>
+    <div class="folderContainer">
+        <% folders.forEach((folder) => { %>
+            <div>
+                <a class="folder" href="<%= '/drive/' + folder.id %>">
+                    <div> <%= folder.name %> </div>
+                    <img  class="folder-icon" src="/file-icon.svg">
+                </a>
+            </div>
+        <% }) %>
+    </div>
 </body>
 
 <script>

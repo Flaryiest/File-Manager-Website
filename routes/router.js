@@ -15,6 +15,8 @@ router.post("/login", controller.login)
 
 router.get("/upload", controller.getUploadPage)
 
+router.get("/drive/:folderID", controller.getFolderPage)
+
 router.post("/drive/create", controller.createFolder)
 
 router.get("/drive", controller.getDrivePage)
