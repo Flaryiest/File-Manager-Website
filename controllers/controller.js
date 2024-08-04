@@ -1,6 +1,10 @@
-bcrypt = require("bcryptjs")
+const db = require("../db/queries")
+const bcrypt = require("bcryptjs")
+const passport = require("passport");
+const LocalStrategy = require('passport-local').Strategy;
 
 async function getHomePage(req, res) {
+    console.log(await db.getAllUsers())
     res.render("index")
 }
 
@@ -10,7 +14,7 @@ async function getSignUpForm(req, res) {
 
 async function signUp(req, res, next) {
     try {
-
+        db.createUser(req.body.username, req.body.email, req.body.password)
     } catch(err) {
         return next(err)
     }
@@ -18,4 +22,18 @@ async function signUp(req, res, next) {
     res.redirect("/")
 }
 
-module.exports = {getHomePage, getSignUpForm, signUp}
+async function getLoginForm(req, res) {
+    res.render("login-form")
+}
+
+async function login(req, res, next) {
+    console.log(req.body.username, req.body.password)
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/login"
+    }) (req, res, next)
+}
+
+
+
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login}

@@ -9,5 +9,9 @@ router.get("/signup", controller.getSignUpForm)
 
 router.post("/signup", controller.signUp)
 
+router.get("/login", controller.getLoginForm)
+
+router.post("/login", controller.login)
+
 module.exports = router
 
