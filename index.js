@@ -51,7 +51,6 @@ passport.use(
     new LocalStrategy(async (username, password, done) => {
         try {
            let user = await db.findUser(username)
-            console.log(user)
             if (!user) {
                 return done(null, false, {message: "Incorrect Username"})
             }

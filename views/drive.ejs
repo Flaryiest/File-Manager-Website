@@ -1,4 +1,15 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/drive.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>File Manager</title>
+</head>
 <body>
     <%- include("./navbar") %>
     <div>
@@ -11,26 +22,45 @@
     createFolderButton.addEventListener("click", createFolderForm)
     
     function createFolderForm() {
+        
         const createFolderForm = document.createElement("form")
         createFolderForm.method = "POST"
         createFolderForm.action = "/drive/create"
+        createFolderForm.classList.add("createFolderForm")
+
         const createFolderHeader = document.createElement("div")
         createFolderHeader.textContent = "Create Form"
+        createFolderHeader.classList.add("createFolderHeader")
+
+        const createFolderButtonContainer = document.createElement("div")
+        createFolderButtonContainer.classList.add("createFolderButtonContainer")
+
         const cancelButton = document.createElement("button")
         cancelButton.textContent = "Cancel"
         cancelButton.type = "button"
+        cancelButton.classList.add("cancelButton")
+        cancelButton.addEventListener("click", function(e) {
+            e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode)
+        })
+
         const createButton = document.createElement("button")
         createButton.textContent = "Create"
+        createButton.classList.add("createButton")
+
         const folderNameLabel = document.createElement("label")
         folderNameLabel.for = "folderNameInput"
+
         const folderNameInput = document.createElement("input")
         folderNameInput.id = "folderNameInput"
         folderNameInput.name = "folderName"
+        folderNameInput.classList.add("folderNameInput")
+
         createFolderForm.appendChild(createFolderHeader)
         folderNameInput.appendChild(folderNameLabel)
         createFolderForm.appendChild(folderNameInput)
-        createFolderForm.appendChild(cancelButton)
-        createFolderForm.appendChild(createButton)
+        createFolderButtonContainer.appendChild(cancelButton)
+        createFolderButtonContainer.appendChild(createButton)
+        createFolderForm.appendChild(createFolderButtonContainer)
         document.body.appendChild(createFolderForm)
     }
 </script>

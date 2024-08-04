@@ -15,7 +15,10 @@ router.post("/login", controller.login)
 
 router.get("/upload", controller.getUploadPage)
 
+router.post("/drive/create", controller.createFolder)
+
 router.get("/drive", controller.getDrivePage)
+
 
 module.exports = router
 

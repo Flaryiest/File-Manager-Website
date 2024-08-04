@@ -1,0 +1,24 @@
+.createFolderForm {
+    position: absolute;
+    height: 20dvh;
+    width: 20dvw;
+    top: 50%;
+    left: 50%;
+    margin-top: -10dvh;
+    margin-left: -10dvw;
+    display: flex;
+    flex-grow: 0;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.createFolderButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 20dvw;
+}
+
+.darken{
+    filter: brightness(50%); 
+}

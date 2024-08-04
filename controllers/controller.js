@@ -5,7 +5,6 @@ const LocalStrategy = require('passport-local').Strategy;
 
 
 async function getHomePage(req, res) {
-    console.log(await db.getAllUsers())
     res.render("index")
 }
 
@@ -38,11 +37,24 @@ async function login(req, res, next) {
 }
 
 async function getUploadPage(req, res) {
+    if (!(req.user)) {
+        res.redirect("/")
+    }
     res.render("upload")
 }
 
 async function getDrivePage(req, res) {
+    if (!(req.user)) {
+        res.redirect("/")
+    }
     res.render("drive")
 }
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage}
+async function createFolder(req, res) {
+    console.log(req.body.folderName)
+    console.log(req.user)
+    db.createFolder(req.user.id, req.body.folderName)
+    res.redirect("/drive")
+}
+
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage, createFolder}

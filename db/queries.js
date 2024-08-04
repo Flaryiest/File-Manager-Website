@@ -31,8 +31,25 @@ async function findUserById(id) {
             id: id,
         },
     })
-    console.log(user)
     return user
 }
 
-module.exports = {findUser, createUser, getAllUsers, findUserById}
+async function createFolder(userID, folderName) {
+    try {
+        const newFolder = await prisma.folder.create({
+            data: {
+                name: folderName,
+                User: {
+                    connect: {id: userID}
+                }
+            }
+        })
+        console.log(newFolder)
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+
+module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder}
