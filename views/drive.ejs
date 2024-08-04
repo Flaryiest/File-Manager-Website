@@ -1,5 +1,36 @@
 
 <body>
     <%- include("./navbar") %>
-    <div></div>
+    <div>
+        <button class="createFolderButton">Create Folder</button>
+    </div>
 </body>
+
+<script>
+    const createFolderButton = document.querySelector(".createFolderButton")
+    createFolderButton.addEventListener("click", createFolderForm)
+    
+    function createFolderForm() {
+        const createFolderForm = document.createElement("form")
+        createFolderForm.method = "POST"
+        createFolderForm.action = "/drive/create"
+        const createFolderHeader = document.createElement("div")
+        createFolderHeader.textContent = "Create Form"
+        const cancelButton = document.createElement("button")
+        cancelButton.textContent = "Cancel"
+        cancelButton.type = "button"
+        const createButton = document.createElement("button")
+        createButton.textContent = "Create"
+        const folderNameLabel = document.createElement("label")
+        folderNameLabel.for = "folderNameInput"
+        const folderNameInput = document.createElement("input")
+        folderNameInput.id = "folderNameInput"
+        folderNameInput.name = "folderName"
+        createFolderForm.appendChild(createFolderHeader)
+        folderNameInput.appendChild(folderNameLabel)
+        createFolderForm.appendChild(folderNameInput)
+        createFolderForm.appendChild(cancelButton)
+        createFolderForm.appendChild(createButton)
+        document.body.appendChild(createFolderForm)
+    }
+</script>

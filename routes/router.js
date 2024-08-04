@@ -15,5 +15,7 @@ router.post("/login", controller.login)
 
 router.get("/upload", controller.getUploadPage)
 
+router.get("/drive", controller.getDrivePage)
+
 module.exports = router
 

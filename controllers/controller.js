@@ -41,5 +41,8 @@ async function getUploadPage(req, res) {
     res.render("upload")
 }
 
+async function getDrivePage(req, res) {
+    res.render("drive")
+}
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage}
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage}
