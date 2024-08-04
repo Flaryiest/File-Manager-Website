@@ -1,0 +1,33 @@
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    max-width: 100dvw;
+    height: 10dvh;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5dvw;
+    padding-right: 5dvw;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    box-shadow: 2px 2px 1px 1px rgb(161, 161, 161);
+}
+
+.navbarLeft {
+    display: flex;
+    gap: 32px;
+    font-size: 2em;
+}
+
+.navbarRight {
+    display: flex;
+    gap: 40px;
+    font-size: 1.8em;
+}

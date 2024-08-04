@@ -11,6 +11,7 @@ const prisma = new PrismaClient({})
 const db = require("./db/queries.js")
 const bcrypt = require("bcryptjs")
 
+
 app.use(express.static(path.join(__dirname, "/public")))
 app.set("views", __dirname + "/views")
 app.set("view engine", "ejs")
@@ -71,5 +72,12 @@ passport.deserializeUser(async (id, done) => {
         done(err)
     }
 })
+
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+  });
+
+  
 
 app.listen(3000, () => {console.log("Listening on port 3000")})

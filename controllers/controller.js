@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs")
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 
+
 async function getHomePage(req, res) {
     console.log(await db.getAllUsers())
     res.render("index")
