@@ -122,7 +122,30 @@ async function deleteFolder(folderID) {
             id: Number(folderID)
         }
     })
-
 }
 
-module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile, getFiles, deleteFile, findFile, deleteFolder}
+async function moveFile(folderID, fileID) {
+    await prisma.file.update({
+        where: {
+            id: Number(fileID)
+        },
+        data: {
+            Folder: {
+                connect: {id: Number(folderID)}
+            }
+        }
+
+    })
+}
+
+async function getFolderFiles(folderID) {
+    const folderFiles = await prisma.folder.findUnique({
+        where: {
+           id: Number(folderID) 
+        },
+        include: {files: true}
+    })
+    return folderFiles.files
+}
+
+module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile, getFiles, deleteFile, findFile, deleteFolder, moveFile, getFolderFiles}

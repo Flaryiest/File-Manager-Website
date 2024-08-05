@@ -137,5 +137,15 @@ async function deleteFolder(req, res) {
     res.redirect("/drive")
 }
 
+async function moveFile(req, res) {
+    await db.moveFile(req.params.folderID, req.params.fileID)
+    res.redirect("/drive")
+}
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile, downloadFile, deleteFile, deleteFolder}
+async function getFolder(req, res) {
+    const folder = await db.getFolder(req.params.folderID)
+    const files = await db.getFolderFiles(req.params.folderID)
+    res.render("folder", {folder: folder, files: files})
+    
+}
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile, downloadFile, deleteFile, deleteFolder, moveFile, getFolder}

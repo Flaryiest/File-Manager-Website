@@ -17,6 +17,10 @@ router.post("/login", controller.login)
 
 router.post("/upload", upload.single('file'), controller.uploadFile)
 
+router.post("/drive/move/:folderID/:fileID", controller.moveFile)
+
+router.get("/drive/folder/:folderID", controller.getFolder)
+
 router.get("/drive/delete/folder/:folderID", controller.deleteFolder)
 
 router.get("/drive/delete/:fileName", controller.deleteFile)
@@ -30,6 +34,7 @@ router.post("/drive/create", controller.createFolder)
 router.get("/drive", controller.getDrivePage)
 
 router.get("/logout", controller.logOut)
+
 
 
 module.exports = router

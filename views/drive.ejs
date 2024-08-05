@@ -28,6 +28,7 @@
         </div>
         <div class="file-container">
             <% folders.forEach((folder) => { %>
+                <a href="/drive/folder/<%=folder.id%>">
                 <div class="row">
                     <div class="icon"></div>
                     <div class="details">
@@ -40,6 +41,7 @@
                         </form>    
                     </div>
                   </div>
+                </a>
             <% }) %>
             <% files.forEach((file) => { %>
                 <div class="row">
@@ -49,6 +51,11 @@
                       <span class="info">File</span>
                     </div>
                     <div class="actions">
+                        <% folders.forEach((folder) => { %>
+                        <form method="POST" action="/drive/move/<%=folder.id%>/<%=file.id%>">
+                            <button type="submit"><%=folder.name%></button>
+                        </form>
+                        <% }) %>
                         <form method="GET" action="/drive/download/<%=file.id%>">
                             <button>Download</button>
                         </form>
