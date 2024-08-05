@@ -44,7 +44,6 @@ async function createFolder(userID, folderName) {
                 }
             }
         })
-        console.log(newFolder)
     }
     catch (err) {
         console.log(err)
@@ -77,7 +76,7 @@ async function addFile(userID, fileName) {
     try {
         const newFile = await prisma.file.create({
             data: {
-                name: fileName,
+                fileName: fileName,
                 User: {
                     connect: {id: userID}
                 }
@@ -90,18 +89,18 @@ async function addFile(userID, fileName) {
 
 async function getFiles(userID) {
     try {
-        const userFiles = prisma.user.findUnique({
+        const userFiles = await prisma.user.findUnique({
             where: {id: userID},
             include: {files: true}
         })
-        return userFiles
+        return userFiles.files
     } catch(err) {
         console.log(err)
     }
 }
 
 async function downloadFile(fileName) {
-    
+
 }
 
 module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile, getFiles}

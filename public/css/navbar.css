@@ -20,6 +20,7 @@ a {
     box-shadow: 2px 2px 1px 1px rgb(161, 161, 161);
     position: relative;
     z-index: 1;
+    background-color: white;
 }
 
 .navbarLeft {

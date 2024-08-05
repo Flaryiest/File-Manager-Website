@@ -35,7 +35,6 @@ async function getLoginForm(req, res) {
 }
 
 async function login(req, res, next) {
-    console.log(req.body.username, req.body.password)
     passport.authenticate("local", {
         successRedirect: "/",
         failureRedirect: "/login"
@@ -44,18 +43,19 @@ async function login(req, res, next) {
 
 
 async function getDrivePage(req, res) {
+    if (!(req.user.id)) {
+        res.redirect("/")
+    }
     userFolders = await db.getFolders(req.user.id)
     userFiles = await db.getFiles(req.user.id)
     console.log(userFolders)
     console.log(userFiles)
-    if (!(req.user)) {
-        res.redirect("/")
-    }
+
     res.render("drive", {folders: userFolders, files: userFiles})
 }
 
 async function createFolder(req, res) {
-    console.log(req.body.folderName)
+
     db.createFolder(req.user.id, req.body.folderName)
     res.redirect("/drive")
 }
@@ -75,6 +75,7 @@ async function getFolderPage(req, res) {
 }
 
 async function uploadFile(req, res, next) {
+    console.log(req.file)
     const file = req.file
     const filePath = 'public/' + req.file.originalname
     try {

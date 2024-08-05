@@ -18,22 +18,39 @@
             <div>
                 <div>Upload File</div>
                 <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <button type="submit">
+                    <input type="file" name="file" class="fileInput">
+                    <button type="submit" class="uploadButton">
                         <img class="uploadIcon" src="/upload-icon.svg">
                     </button>
                 </form>
             </div>
         
         </div>
-        <div class="folderContainer">
+        <div class="file-container">
             <% folders.forEach((folder) => { %>
-                <div>
-                    <a class="folder" href="<%= '/drive/' + folder.id %>">
-                        <div> <%= folder.name %> </div>
-                        <img  class="folder-icon" src="/file-icon.svg">
-                    </a>
-                </div>
+                <div class="row">
+                    <div class="icon"></div>
+                    <div class="details">
+                      <span class="name"> <%= folder.name %></span>
+                      <span class="info">Folder</span>
+                    </div>
+                    <div class="actions">
+                      <button>Delete</button>
+                    </div>
+                  </div>
+            <% }) %>
+            <% files.forEach((file) => { %>
+                <div class="row">
+                    <div class="icon"></div>
+                    <div class="details">
+                      <span class="name"> <%= file.fileName %></span>
+                      <span class="info">File</span>
+                    </div>
+                    <div class="actions"> 
+                      <button>Download</button>
+                      <button>Delete</button>
+                    </div>
+                  </div>
             <% }) %>
         </div>
     </div>

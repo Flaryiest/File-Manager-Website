@@ -62,8 +62,8 @@
     padding-left: 3dvw;
     padding-right: 3dvw;
     font-family: "Lato";
-    background-color: bisque;
-    box-shadow: 1px 1px 1px 1px rgb(172, 172, 172);
+    background-color: #fff9f9;
+    border-right: 1px solid #ddd;
 }
 
 .content {
@@ -72,4 +72,137 @@
 
 .uploadIcon {
     width: 50px;
+}
+
+
+
+.createFolderButton {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.createFolderButton:hover {
+    background-color: #0056b3;
+}
+
+.uploadSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.uploadTitle {
+    font-weight: bold;
+}
+
+.uploadForm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fileInput {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.uploadButton {
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.uploadButton:hover {
+    background-color: #218838;
+}
+
+.uploadIcon {
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+}
+
+
+
+  
+body {
+font-family: Arial, sans-serif;
+background-color: #f5f5f5;
+}
+
+.file-container {
+width: 100%;
+max-width: 800px;
+margin: 20px auto;
+background-color: #fff;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+font-family: "Lato";
+}
+
+.row {
+display: flex;
+align-items: center;
+padding: 12px 16px;
+border-bottom: 1px solid #e0e0e0;
+transition: background-color 0.2s ease-in-out;
+}
+
+.row:hover {
+background-color: #f1f3f4;
+}
+
+.icon {
+width: 24px;
+height: 24px;
+background-color: #e0e0e0;
+border-radius: 4px;
+margin-right: 16px;
+}
+
+.details {
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+}
+
+.name {
+font-size: 14px;
+font-weight: 500;
+color: #202124;
+}
+
+.info {
+font-size: 12px;
+color: #5f6368;
+margin-top: 4px;
+}
+
+.actions {
+display: flex;
+align-items: center;
+}
+
+.actions button {
+background: none;
+border: none;
+font-size: 16px;
+color: #5f6368;
+cursor: pointer;
+padding: 8px;
+border-radius: 50%;
+transition: background-color 0.2s ease-in-out;
+}
+
+.actions button:hover {
+background-color: rgba(0, 0, 0, 0.05);
 }
