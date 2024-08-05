@@ -5,6 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const multer = require("multer")
 const upload = multer({dest: "uploads/"})
 
+
 async function getHomePage(req, res) {
     res.render("index")
 }
