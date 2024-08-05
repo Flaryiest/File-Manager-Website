@@ -1,0 +1,10 @@
+<Application>
+  <VisualElements
+      DisplayName='Slack'
+      Logo='app-4.39.95\resources\SlackLogo.png'
+      SmallLogo='app-4.39.95\resources\SlackSmallTile.png'
+      ForegroundText='light'
+      BackgroundColor='#00000000'>
+    <DefaultTile ShowName='allLogos'/>
+  </VisualElements>
+</Application>

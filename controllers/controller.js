@@ -4,7 +4,11 @@ const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const multer = require("multer")
 const upload = multer({dest: "uploads/"})
-
+require("dotenv").config()
+const {createClient} = require("@supabase/supabase-js")
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
+const path = require("path")
+const fs = require("fs")
 
 async function getHomePage(req, res) {
     res.render("index")
@@ -69,9 +73,21 @@ async function getFolderPage(req, res) {
 }
 
 async function uploadFile(req, res, next) {
-    console.log(req.file, "test")
-
+    const file = req.file
+    const filePath = 'public/' + req.file.originalname
+    try {
+        const fileContent = fs.readFileSync(file.path)
+        const {data, error } = await supabase.storage.from("files").upload(filePath,  fileContent, {
+            cacheControl: "3600",
+            upsert: false
+        })
+        if (error) {
+            throw(error)
+        }
+    } catch(err) {
+        console.log(err)
+    }
+    
     res.redirect("/drive")
 }
-
 module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile}

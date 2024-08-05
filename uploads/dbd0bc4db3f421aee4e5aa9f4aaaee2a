@@ -1,0 +1,9 @@
+<Application xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+  <VisualElements
+      ShowNameOnSquare150x150Logo='on'
+      Square150x150Logo='app-4.39.95\resources\SlackLogo.png'
+      Square70x70Logo='app-4.39.95\resources\SlackSmallTile.png'
+      Square44x44Logo='app-4.39.95\resources\SlackAppList.png'
+      ForegroundText='light'
+      BackgroundColor='#00000000'/>
+</Application>
