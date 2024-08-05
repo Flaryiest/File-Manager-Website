@@ -9,6 +9,7 @@ const {createClient} = require("@supabase/supabase-js")
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
 const path = require("path")
 const fs = require("fs")
+const stream = require("stream")
 
 async function getHomePage(req, res) {
     res.render("index")
@@ -48,8 +49,7 @@ async function getDrivePage(req, res) {
     }
     userFolders = await db.getFolders(req.user.id)
     userFiles = await db.getFiles(req.user.id)
-    console.log(userFolders)
-    console.log(userFiles)
+
 
     res.render("drive", {folders: userFolders, files: userFiles})
 }
@@ -75,7 +75,6 @@ async function getFolderPage(req, res) {
 }
 
 async function uploadFile(req, res, next) {
-    console.log(req.file)
     const file = req.file
     const filePath = 'public/' + req.file.originalname
     try {
@@ -93,4 +92,29 @@ async function uploadFile(req, res, next) {
     await db.addFile(req.user.id, req.file.originalname)
     res.redirect("/drive")
 }
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile}
+
+async function downloadFile(req, res, next) {
+
+    const filePath = 'public/' + req.params.fileName
+    try {
+        const {data, error } = await supabase.storage.from("files").download(filePath)
+        if (error) {
+            throw(error)
+        }
+        const arrayBuffer = await data.arrayBuffer()
+        const buffer = Buffer.from(arrayBuffer)
+        res.setHeader('Content-Disposition', `attachment; filename=${req.params.fileName}`);
+        res.setHeader('Content-Type', 'application/octet-stream');
+        const readableStream = new stream.Readable()
+        readableStream._read = () => {}
+        readableStream.push(buffer)
+        readableStream.push(null)
+        readableStream.pipe(res)
+    } catch(err) {
+        throw(err)
+    }
+
+
+}
+
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile, downloadFile}

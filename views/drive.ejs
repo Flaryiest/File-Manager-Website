@@ -46,9 +46,11 @@
                       <span class="name"> <%= file.fileName %></span>
                       <span class="info">File</span>
                     </div>
-                    <div class="actions"> 
-                      <button>Download</button>
-                      <button>Delete</button>
+                    <div class="actions">
+                        <form method="GET" action="/drive/download/<%=file.fileName%>">
+                            <button>Download</button>
+                        </form>
+                            <button>Delete</button>
                     </div>
                   </div>
             <% }) %>
