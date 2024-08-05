@@ -12,8 +12,33 @@
 </head>
 <body>
     <%- include("./navbar") %>
-    <h2><%= folder.name %></h2>
+    <div class="folderName">
+    <h2 class="heading"><%= folder.name %></h2>
     <div>
-        <div>Your Files</div>
+        <div class="subHeading">Your Files</div>
+    </div>
+    </div>
+    <div class="file-container">
+        <% files.forEach((file) => { %>
+            <div class="row">
+                <div class="icon"></div>
+                <div class="details">
+                  <span class="name"> <%= file.fileName %></span>
+                  <span class="info">File</span>
+                </div>
+                <div class="actions">
+                    <form method="POST" action="/drive/return/<%=file.id%>">
+                        <button type="submit">Move</button>
+                    </form>
+
+                    <form method="GET" action="/drive/download/<%=file.id%>">
+                        <button>Download</button>
+                    </form>
+                    <form method="GET" action="/drive/delete/<%=file.id%>">
+                        <button>Delete</button>
+                    </form>
+                </div>
+              </div>
+        <% }) %>
     </div>
 </body>

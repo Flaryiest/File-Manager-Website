@@ -94,7 +94,9 @@ async function uploadFile(req, res, next) {
 }
 
 async function downloadFile(req, res, next) {
-    const filePath = 'public/' + req.params.fileName
+    const file = await db.findFile(req.params.fileName)
+    const filePath = 'public/' + file.fileName
+    console.log(filePath, "file path")
     try {
         const {data, error } = await supabase.storage.from("files").download(filePath)
         if (error) {
@@ -102,7 +104,7 @@ async function downloadFile(req, res, next) {
         }
         const arrayBuffer = await data.arrayBuffer()
         const buffer = Buffer.from(arrayBuffer)
-        res.setHeader('Content-Disposition', `attachment; filename=${req.params.fileName}`);
+        res.setHeader('Content-Disposition', `attachment; filename=${file.fileName}`);
         res.setHeader('Content-Type', 'application/octet-stream');
         const readableStream = new stream.Readable()
         readableStream._read = () => {}
@@ -138,7 +140,7 @@ async function deleteFolder(req, res) {
 }
 
 async function moveFile(req, res) {
-    await db.moveFile(req.params.folderID, req.params.fileID)
+    await db.moveFile(req.params.folderID, req.params.fileID, req.user.id)
     res.redirect("/drive")
 }
 
@@ -148,4 +150,9 @@ async function getFolder(req, res) {
     res.render("folder", {folder: folder, files: files})
     
 }
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile, downloadFile, deleteFile, deleteFolder, moveFile, getFolder}
+
+async function returnFile(req, res) {
+    await db.returnFile(req.user.id, req.params.fileID)
+    res.redirect("/drive")
+}
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile, downloadFile, deleteFile, deleteFolder, moveFile, getFolder, returnFile}

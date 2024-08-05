@@ -207,3 +207,25 @@ transition: background-color 0.2s ease-in-out;
 background-color: rgba(0, 0, 0, 0.05);
 }
 
+.folderName {
+    width: 100dvw;
+    font-family: "lato";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 3dvh;
+
+}
+
+.heading {
+    font-size: 3em
+}
+.subHeading {
+    font-size: 2em;
+    margin-top: 4dvh;
+}
+
+.createFolderInput {
+    height: 3dvh;
+}

@@ -17,6 +17,8 @@ router.post("/login", controller.login)
 
 router.post("/upload", upload.single('file'), controller.uploadFile)
 
+router.post("/drive/return/:fileID", controller.returnFile)
+
 router.post("/drive/move/:folderID/:fileID", controller.moveFile)
 
 router.get("/drive/folder/:folderID", controller.getFolder)

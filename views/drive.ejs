@@ -14,7 +14,12 @@
     <%- include("./navbar") %>
     <div class="content">
         <div class="sideBar">
-            <button class="createFolderButton">Create Folder</button>
+            <form method="POST" action="/drive/create">
+                <input name="folderName" placeholder="Folder Name" class="createFolderInput"></input>
+                <button class="createFolderButton">Create Folder</button>
+            </form>
+    
+            
             <div>
                 <div>Upload File</div>
                 <form action="/upload" method="POST" enctype="multipart/form-data">
@@ -69,50 +74,4 @@
     </div>
 </body>
 
-<script>
-    const createFolderButton = document.querySelector(".createFolderButton")
-    createFolderButton.addEventListener("click", createFolderForm)
-    
-    function createFolderForm() {
-        
-        const createFolderForm = document.createElement("form")
-        createFolderForm.method = "POST"
-        createFolderForm.action = "/drive/create"
-        createFolderForm.classList.add("createFolderForm")
 
-        const createFolderHeader = document.createElement("div")
-        createFolderHeader.textContent = "Create Form"
-        createFolderHeader.classList.add("createFolderHeader")
-
-        const createFolderButtonContainer = document.createElement("div")
-        createFolderButtonContainer.classList.add("createFolderButtonContainer")
-
-        const cancelButton = document.createElement("button")
-        cancelButton.textContent = "Cancel"
-        cancelButton.type = "button"
-        cancelButton.classList.add("cancelButton")
-        cancelButton.addEventListener("click", function(e) {
-            e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode)
-        })
-
-        const createButton = document.createElement("button")
-        createButton.textContent = "Create"
-        createButton.classList.add("createButton")
-
-        const folderNameLabel = document.createElement("label")
-        folderNameLabel.for = "folderNameInput"
-
-        const folderNameInput = document.createElement("input")
-        folderNameInput.id = "folderNameInput"
-        folderNameInput.name = "folderName"
-        folderNameInput.classList.add("folderNameInput")
-
-        createFolderForm.appendChild(createFolderHeader)
-        folderNameInput.appendChild(folderNameLabel)
-        createFolderForm.appendChild(folderNameInput)
-        createFolderButtonContainer.appendChild(cancelButton)
-        createFolderButtonContainer.appendChild(createButton)
-        createFolderForm.appendChild(createFolderButtonContainer)
-        document.body.appendChild(createFolderForm)
-    }
-</script>
