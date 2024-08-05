@@ -115,8 +115,27 @@ async function downloadFile(req, res, next) {
 }
 
 async function deleteFile(req, res) {
+    const file = await db.findFile(req.params.fileName)
+    const filePath = "public/" + file.fileName
+    console.log(filePath)
     db.deleteFile(req.params.fileName)
+    try {
+        const {data, error} = await supabase.storage.from("files").remove([filePath])
+        if (error) {
+            console.log(error)
+        }
+    } catch(err) {
+        throw(err)
+    }
+
     res.redirect("/drive")
 }
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile, downloadFile, deleteFile}
+async function deleteFolder(req, res) {
+    console.log(req.params.folderID)
+    await db.deleteFolder(req.params.folderID)
+    res.redirect("/drive")
+}
+
+
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile, downloadFile, deleteFile, deleteFolder}

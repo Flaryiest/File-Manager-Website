@@ -35,7 +35,9 @@
                       <span class="info">Folder</span>
                     </div>
                     <div class="actions">
-                      <button>Delete</button>
+                        <form method="GET" action="/drive/delete/folder/<%=folder.id%>">
+                            <button>Delete</button>
+                        </form>    
                     </div>
                   </div>
             <% }) %>
@@ -47,10 +49,10 @@
                       <span class="info">File</span>
                     </div>
                     <div class="actions">
-                        <form method="GET" action="/drive/download/<%=file.fileName%>">
+                        <form method="GET" action="/drive/download/<%=file.id%>">
                             <button>Download</button>
                         </form>
-                        </form method="GET" action="/drive/delete/<%=file.fileName%>">
+                        <form method="GET" action="/drive/delete/<%=file.id%>">
                             <button>Delete</button>
                         </form>
                     </div>

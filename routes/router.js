@@ -17,6 +17,8 @@ router.post("/login", controller.login)
 
 router.post("/upload", upload.single('file'), controller.uploadFile)
 
+router.get("/drive/delete/folder/:folderID", controller.deleteFolder)
+
 router.get("/drive/delete/:fileName", controller.deleteFile)
 
 router.get("/drive/download/:fileName", controller.downloadFile)
