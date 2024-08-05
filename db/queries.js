@@ -73,4 +73,19 @@ async function getFolder(folderID) {
     return folder
 }
 
-module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder}
+async function addFile(userID, fileName) {
+    try {
+        const newFile = await prisma.file.create({
+            data: {
+                name: fileName,
+                User: {
+                    connect: {id: userID}
+                }
+            }
+        })
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile}
