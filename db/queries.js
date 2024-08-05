@@ -99,8 +99,12 @@ async function getFiles(userID) {
     }
 }
 
-async function downloadFile(fileName) {
-
+async function deleteFile(fileName) {
+    await prisma.file.delete({
+        where: {
+            fileName: fileName
+        }
+    })
 }
 
-module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile, getFiles}
+module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile, getFiles, deleteFile}
