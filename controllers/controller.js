@@ -2,7 +2,8 @@ const db = require("../db/queries")
 const bcrypt = require("bcryptjs")
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
-
+const multer = require("multer")
+const upload = multer({dest: "uploads/"})
 
 async function getHomePage(req, res) {
     res.render("index")
@@ -36,12 +37,6 @@ async function login(req, res, next) {
     }) (req, res, next)
 }
 
-async function getUploadPage(req, res) {
-    if (!(req.user)) {
-        res.redirect("/")
-    }
-    res.render("upload")
-}
 
 async function getDrivePage(req, res) {
     userFolders = await db.getFolders(req.user.id)
@@ -72,5 +67,10 @@ async function getFolderPage(req, res) {
     res.render("folder", {folder: folder})
 }
 
+async function uploadFile(req, res, next) {
+    console.log(req.file, "test")
 
-module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getUploadPage, getDrivePage, createFolder, logOut, getFolderPage}
+    res.redirect("/drive")
+}
+
+module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile}

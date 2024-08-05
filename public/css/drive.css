@@ -45,5 +45,31 @@
     padding-right: 10dvw;
     padding-top: 10dvh;
     padding-bottom: 10dvh;
+    gap: 32px;
 
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 70dvh;
+    max-width: 20dvw;
+    align-items:flex-start;
+    justify-content: space-between;
+    padding-top: 10dvh;
+    padding-bottom: 10dvh;
+    padding-left: 3dvw;
+    padding-right: 3dvw;
+    font-family: "Lato";
+    background-color: bisque;
+    box-shadow: 1px 1px 1px 1px rgb(172, 172, 172);
+}
+
+.content {
+    display: flex;
+}
+
+.uploadIcon {
+    width: 50px;
 }
