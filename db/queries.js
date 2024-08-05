@@ -88,4 +88,20 @@ async function addFile(userID, fileName) {
     }
 }
 
-module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile}
+async function getFiles(userID) {
+    try {
+        const userFiles = prisma.user.findUnique({
+            where: {id: userID},
+            include: {files: true}
+        })
+        return userFiles
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+async function downloadFile(fileName) {
+    
+}
+
+module.exports = {findUser, createUser, getAllUsers, findUserById, createFolder, getFolders, getFolder, addFile, getFiles}

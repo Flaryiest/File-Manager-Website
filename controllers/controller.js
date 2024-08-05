@@ -45,11 +45,13 @@ async function login(req, res, next) {
 
 async function getDrivePage(req, res) {
     userFolders = await db.getFolders(req.user.id)
+    userFiles = await db.getFiles(req.user.id)
     console.log(userFolders)
+    console.log(userFiles)
     if (!(req.user)) {
         res.redirect("/")
     }
-    res.render("drive", {folders: userFolders})
+    res.render("drive", {folders: userFolders, files: userFiles})
 }
 
 async function createFolder(req, res) {
@@ -87,7 +89,7 @@ async function uploadFile(req, res, next) {
     } catch(err) {
         console.log(err)
     }
-    
+    await db.addFile(req.user.id, req.file.originalname)
     res.redirect("/drive")
 }
 module.exports = {getHomePage, getSignUpForm, signUp, getLoginForm, login, getDrivePage, createFolder, logOut, getFolderPage, uploadFile}
